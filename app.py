@@ -24,7 +24,7 @@ import requests
 def check_password():
     def password_entered():
         # Your specified password
-        if st.session_state["password"] == "Vivekyadav21@":
+        if st.session_state["password"] == "0010":
             st.session_state["password_correct"] = True
             del st.session_state["password"]
         else:
