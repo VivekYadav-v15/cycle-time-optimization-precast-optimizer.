@@ -24,7 +24,8 @@ import requests
 def check_password():
     def password_entered():
         # Your specified password
-        if st.session_state["password"] == "0010":
+        # 🟢 THE FIX: Pulling the password securely from Streamlit Secrets
+        if st.session_state["password"] == st.secrets["SITE_PASSWORD"]:
             st.session_state["password_correct"] = True
             del st.session_state["password"]
         else:
@@ -49,7 +50,7 @@ def check_password():
             except:
                 st.warning("⚠️ L&T LOGO.png not found in folder.")
                 
-            st.title("CreaTech Optimizer")
+            st.title("L&T Precast Yards")
             st.markdown("### Secure Site Access")
             st.text_input("Enter Credentials", type="password", on_change=password_entered, key="password", placeholder="Access Key")
             st.info("Authorized L&T Personnel Only")
@@ -154,7 +155,8 @@ st.markdown("""
 if 'app_mode' not in st.session_state:
     st.session_state.app_mode = 'home'
 
-GEMINI_API_KEY = "AIzaSyBFKCF-ERrrLliCr7f947JA9eA-Djcvf0Q"
+# 🟢 THE FIX: Pulling the API key securely from Streamlit Cloud Secrets
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 
 # --- HELPER: CONVERT IMAGES TO BASE64 ---
 def get_base64_of_bin_file(bin_file):
